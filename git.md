@@ -10,7 +10,7 @@ $ git checkout -b <branch_name>
 
 ### Get the latest changes to the branch
 
-Details here: http://longair.net/blog/2009/04/16/git-fetch-and-merge/
+Details: http://longair.net/blog/2009/04/16/git-fetch-and-merge/
 
 ```bash
 $ git fetch origin
@@ -30,13 +30,20 @@ $ git reset --hard origin/develop
 $ git add .
 ```
 
-### Roll back the last commit but leave files intact
+### Roll back the last commit and leave changes intact
 
 ```bash
 $ git reset --soft HEAD~1
 ```
 
+### Roll back the last commit and delete the changes
+
+```bash
+$ git reset --hard HEAD~1
+```
+
 ### Push my feature branch back to origin
+
 ```bash
 $ git push origin <branch_name>
 ```
@@ -57,7 +64,52 @@ $ git merge develop
 $ git push origin --delete <branch_name>
 ```
 
-#### Rename the current local branch
+### Rename the current local branch
 ```bash
 $ git branch -m <new_branch_name>
 ```
+
+### Rename the last commit message (not after pushing!)
+
+```bash
+$ git commit --amend -m 'Fixed message'
+```
+
+### Stashing
+
+```bash
+$ git stash
+$ git stash apply
+
+$ git stash list
+$ git stash apply stash@{n}
+
+$ git stash drop stash@{0}
+```
+
+### Delete all stashes
+
+```bash
+$ git stash clear
+```
+
+### Show last `n` commits
+
+```bash
+$ git log --oneline -<n>
+```
+
+### Fix committing to the wrong branch (master)
+
+Details: https://stackoverflow.com/a/21605987/5983589
+
+```bash
+$ git stash
+
+$ git branch <branch_name>
+$ git reset --hard origin/master
+$ git checkout <branch_name>
+
+$ git stash pop
+```
+
